@@ -40,5 +40,4 @@ hugo = Personnage(input("nom :"))
 """
 On commit des trucs 
 """
-
-
+print("caca")
