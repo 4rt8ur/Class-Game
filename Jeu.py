@@ -35,9 +35,3 @@ class Personnage:
     
 
 hugo = Personnage(input("nom :"))
-
-
-"""
-On commit des trucs 
-"""
-print("caca")
