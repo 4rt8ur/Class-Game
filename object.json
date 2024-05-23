@@ -1,0 +1,44 @@
+{
+    "objects" : [
+        {
+            "name" : "bougnoule",
+            "attack" : "5",
+            "defense" : "4",
+            "vie" : "43"
+        },
+        {
+            "name" : "caca",
+            "attack" : "5",
+            "defense" : "4",
+            "vie" : "45"
+        },
+        {
+            "name" : "proute",
+            "attack" : "99999",
+            "defense" : "55",
+            "vie" : "32"
+        },
+        {
+            "name" : "pipi",
+            "attack" : "323",
+            "defense" : "4",
+            "vie" : "2"
+        },
+        {
+            "name" : "Hugo",
+            "attack" : "100",
+            "defense" : "45",
+            "vie" : "44444"
+        }
+    ]
+
+
+
+
+
+
+
+
+
+
+}
