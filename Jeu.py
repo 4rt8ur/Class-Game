@@ -44,9 +44,3 @@ class Personnage:
         self.__name = new
     
 
-hugo = Personnage(input("nom :"))
-objets = [caca, pipi, prout]
-class Jeu :
-    def __init__(self, objets):
-        self.items = objets
-                
