@@ -1,7 +1,9 @@
 import json
+import os
 
 # Chemin vers le fichier JSON
-fichier_json = 'C:\Users\arthu\Documents\PERSO\PROJECTS\Class-Game\object.json'
+fichier_json = os.path.join('data', 'object.json')
+
 
 # Ouverture et lecture du fichier
 with open(fichier_json, 'r') as fichier:
@@ -9,6 +11,8 @@ with open(fichier_json, 'r') as fichier:
 
 # Affichage des données désérialisées
 print(donnees)
+
+
 
 
 class Personnage:
@@ -43,10 +47,3 @@ class Personnage:
     def setName(self, new):
         self.__name = new
     
-
-hugo = Personnage(input("nom :"))
-objets = []
-class Jeu :
-    def __init__(self, objets):
-        self.items = objets
-                
