@@ -11,3 +11,4 @@ def multiVMAXSHINNY(liste):
 
 nombre = multiVMAXSHINNY(nombre)
 print(nombre)
+

@@ -1,34 +1,29 @@
 {
-    "objects" : [
+    "mobs" : [
         {
-            "name" : "bougnoule",
+            "name" : "bo",
             "attack" : "5",
-            "defense" : "4",
-            "vie" : "43"
+            "hp" : "43"
         },
         {
-            "name" : "caca",
+            "name" : "ca",
             "attack" : "5",
-            "defense" : "4",
-            "vie" : "45"
+            "hp" : "45"
         },
         {
-            "name" : "proute",
-            "attack" : "99999",
-            "defense" : "55",
-            "vie" : "32"
+            "name" : "pro",
+            "attack" : "9",
+            "hp" : "32"
         },
         {
-            "name" : "pipi",
-            "attack" : "323",
-            "defense" : "4",
-            "vie" : "2"
+            "name" : "pi",
+            "attack" : "3",
+            "hp" : "2"
         },
         {
-            "name" : "Hugo",
-            "attack" : "100",
-            "defense" : "45",
-            "vie" : "44444"
+            "name" : "hug",
+            "attack" : "10",
+            "hp" : "44"
         }
     ]
 

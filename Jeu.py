@@ -7,26 +7,22 @@ fichier_json = os.path.join('data', 'object.json')
 
 # Ouverture et lecture du fichier
 with open(fichier_json, 'r') as fichier:
-    donnees = json.load(fichier)
+    data = json.load(fichier)
 
 # Affichage des données désérialisées
-print(donnees)
-
-
+print(data)
 
 
 class Personnage:
 
     countID = 0
     
-    def __init__(self, name, hp=100, attack=100):
+    def __init__(self, data):
         
-        self.__name = name
-        self.__hp = hp
-        self.__attack = attack
+        self.__name = data.get('name','Monstre')
+        self.__hp = int(data.get('hp','5'))
+        self.__attack = int(data.get('attack','5'))
         self.__critHit = 5
-        self.__id = Personnage.countID
-        Personnage.countID+=1
 
    
 
@@ -44,6 +40,12 @@ class Personnage:
     def getHp(self):
         return self.__hp
     
-    def setName(self, new):
-        self.__name = new
-    
+# Création des listes d'instance
+monstres = [Personnage(obj) for obj in data['mobs']]
+
+bo = monstres[0]
+ca = monstres[1]
+pro = monstres[2]
+pi = monstres[3] 
+hug = monstres[4] 
+
