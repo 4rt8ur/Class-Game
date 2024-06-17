@@ -3,17 +3,17 @@
         {
             "name" : "bo",
             "attack" : "5",
-            "hp" : "43"
+            "hp" : "9"
         },
         {
             "name" : "ca",
-            "attack" : "5",
-            "hp" : "45"
+            "attack" : "4",
+            "hp" : "15"
         },
         {
             "name" : "pro",
-            "attack" : "9",
-            "hp" : "32"
+            "attack" : "3",
+            "hp" : "21"
         },
         {
             "name" : "pi",
@@ -22,17 +22,175 @@
         },
         {
             "name" : "hug",
-            "attack" : "10",
-            "hp" : "44"
+            "attack" : "2",
+            "hp" : "4"
+        }
+    ],
+ 
+    "boss" : [
+
+        {
+            "name" : "Alraz",
+            "attack" : "9",
+            "hp" : "43"
+        },
+        {
+            "name" : "Poluti",
+            "attack" : "14",
+            "hp" : "45"
+        },
+        {
+            "name" : "Mulroxo",
+            "attack" : "20",
+            "hp" : "54"
+        }
+
+    ],
+
+
+    "objects" : [
+
+        {
+            "name": "épée enflammée",
+            "attack": "12",
+            "hp": "5",
+            "critHit": "7",
+            "cost" : "11"
+        },
+        {
+            "name": "bouclier mystique",
+            "attack": "2",
+            "hp": "15",
+            "critHit": "3",
+            "cost" : "11"
+        },
+        {
+            "name": "arc elfique",
+            "attack": "8",
+            "hp": "4",
+            "critHit": "10",
+            "cost" : "8"
+        },
+        {
+            "name": "dague de l'ombre",
+            "attack": "10",
+            "hp": "3",
+            "critHit": "12",
+            "cost" : "13"
+        },
+        {
+            "name": "marteau de guerre",
+            "attack": "15",
+            "hp": "10",
+            "critHit": "5",
+            "cost" : "12"
+        },
+        {
+            "name": "amulette sacrée",
+            "attack": "3",
+            "hp": "20",
+            "critHit": "2",
+            "cost" : "10"
+        },
+        {
+            "name": "casque de gladiateur",
+            "attack": "5",
+            "hp": "10",
+            "critHit": "6",
+            "cost" : "7"
+        },
+        {
+            "name": "bottes de vitesse",
+            "attack": "7",
+            "hp": "6",
+            "critHit": "8",
+            "cost" : "5"
+        },
+        {
+            "name": "cape d'invisibilité",
+            "attack": "4",
+            "hp": "7",
+            "critHit": "15",
+            "cost" : "8"
+        },
+        {
+            "name": "bâton de sorcier",
+            "attack": "9",
+            "hp": "8",
+            "critHit": "9",
+            "cost" : "9"
+        },
+        {
+            "name": "ceinture de force",
+            "attack": "10",
+            "hp": "12",
+            "critHit": "4",
+            "cost" : "9"
+        },
+        {
+            "name": "gantelets de puissance",
+            "attack": "11",
+            "hp": "5",
+            "critHit": "6",
+            "cost" : "9"
+        },
+        {
+            "name": "anneau de vitalité",
+            "attack": "2",
+            "hp": "25",
+            "critHit": "1",
+            "cost" : "12"
+        },
+        {
+            "name": "arcane d'énergie",
+            "attack": "13",
+            "hp": "4",
+            "critHit": "8",
+            "cost" : "11"
+        },
+        {
+            "name": "lance de lumière",
+            "attack": "14",
+            "hp": "7",
+            "critHit": "7",
+            "cost" : "9"
+        },
+        {
+            "name": "masque du faucon",
+            "attack": "5",
+            "hp": "6",
+            "critHit": "14",
+            "cost" : "8"
+        },
+        {
+            "name": "plastron de titane",
+            "attack": "3",
+            "hp": "18",
+            "critHit": "3",
+            "cost" : "9"
+        },
+        {
+            "name": "épée des cieux",
+            "attack": "16",
+            "hp": "2",
+            "critHit": "9",
+            "cost" : "10"
+        },
+        {
+            "name": "bouclier de cristal",
+            "attack": "4",
+            "hp": "22",
+            "critHit": "2",
+            "cost" : "10"
+        },
+        {
+            "name": "épaulières de fer",
+            "attack": "6",
+            "hp": "10",
+            "critHit": "5",
+            "cost" : "7"
         }
     ]
-
-
-
-
-
-
-
 
 
 
