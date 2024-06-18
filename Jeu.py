@@ -1,7 +1,12 @@
+# coding: utf-8
+
 import json
 import os
 
-# Chemin vers le fichier JSON
+# Clear le terminal 
+os.system("cls")
+
+# Chemin relatif vers le fichier JSON
 fichier_json = os.path.join('data', 'object.json')
 
 
@@ -9,19 +14,18 @@ fichier_json = os.path.join('data', 'object.json')
 with open(fichier_json, 'r') as fichier:
     data = json.load(fichier)
 
-# Affichage des données désérialisées
-print(data)
 
 ###-----------------------------------------------------------------------------------------###
 
 # Création d'une classe Personnage pour créer les monstres et le personnage principale
 class Personnage:
+    
+    def __init__(self, name):
+        self._name = name
+        self._critHit = 5
 
     def getName(self):
         return self._name
-
-    def getID(self):
-        return self._id
     
     def getAttack(self):
         return self._attack
@@ -36,22 +40,18 @@ class Personnage:
 class Monstres(Personnage):
     
     def __init__(self, data):
-    
-        self._name = data.get('name','Monstre')
+        super().__init__(data.get('name','Monstre'))
         self._hp = int(data.get('hp','5'))
         self._attack = int(data.get('attack','5'))
-        self._critHit = 5
     
 class Joueur(Personnage):
     
     def __init__(self, nom):
-        
-        self._name = nom
+        super().__init__(nom)
         self._hp = 5
         self._attack = 3
-        self._critHit = 5
         self._money = 0
-        self._object = False
+        self._object = None 
         
     def getMoney(self):
         return self._money
@@ -59,13 +59,17 @@ class Joueur(Personnage):
 #--------------------------------------------------------- Class pour les objets --------------------------------------------------
 class Object :
     def __init__(self, data):
-        pass
-        
-        self._name = data.get('name','objet')
-        self._hp = int(data.get('hp','0'))
-        self._attack = int(data.get('attack','0'))
-        self._critHit = int(data.get('critHit','0'))
-        self._cost = int(data.get('money','10'))
+        self._name:     str = data.get('name','objet')
+        self._hp:       int = int(data.get('hp','0'))
+        self._attack:   int = int(data.get('attack','0'))
+        self._critHit:  int = int(data.get('critHit','0'))
+        self._cost:     int = int(data.get('cost','10'))
+    
+    def getName(self):
+        return self._name
+    
+    def getCost(self):
+        return self._cost
 
 # ------------------------------------------------------------------- Création du personnage principal ----------------------------------------
 
@@ -82,4 +86,34 @@ boss = [Monstres(obj) for obj in data['boss']] # 3 instances(boss) dans la liste
 objects = [Object(obj) for obj in data['objects']] # 20 instances(objets) dans la liste
 
 #-------------------------------------------------------------------------- Class Jeu ------------------------------------------------------------
+
+class Jeu :
+    def __init__(self, monstres, boss, character, objects):
+        self._monstre = monstres
+        self._boss = boss
+        self._joueur = character
+        self._objects = objects
+        
+    def openStore(self):
+        #for i in range(20):
+          #  print(jeu.getNameobjects(i),"/" ,jeu.getCost(i),"")
+        for obj in self._objects:
+            print(obj.getName(), " -> ", obj.getCost(), "€")
+        
+    def getCost(self, i):
+        return self._objects[i]._cost
+        
+    def getNameobjects(self, i):
+        return self._objects[i]._name
+    
+    def getNameMonstre(self, i):
+        return self._monstre[i]._name
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+#_________________________________________________________________________________________________________________________________________________________________________________________#
+
+jeu = Jeu(monstres, boss, principal_character, objects)
+
+jeu.openStore()
+
 

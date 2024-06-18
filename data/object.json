@@ -48,150 +48,148 @@
     ],
 
 
-    "objects" : [
+    "objects": [
 
         {
-            "name": "épée enflammée",
+            "name": "Flaming Sword",
             "attack": "12",
             "hp": "5",
             "critHit": "7",
             "cost" : "11"
         },
         {
-            "name": "bouclier mystique",
+            "name": "Mystic Shield",
             "attack": "2",
             "hp": "15",
             "critHit": "3",
             "cost" : "11"
         },
         {
-            "name": "arc elfique",
+            "name": "Elven Bow",
             "attack": "8",
             "hp": "4",
             "critHit": "10",
             "cost" : "8"
         },
         {
-            "name": "dague de l'ombre",
+            "name": "Shadow Dagger",
             "attack": "10",
             "hp": "3",
             "critHit": "12",
             "cost" : "13"
         },
         {
-            "name": "marteau de guerre",
+            "name": "War Hammer",
             "attack": "15",
             "hp": "10",
             "critHit": "5",
             "cost" : "12"
         },
         {
-            "name": "amulette sacrée",
+            "name": "Sacred Amulet",
             "attack": "3",
             "hp": "20",
             "critHit": "2",
             "cost" : "10"
         },
         {
-            "name": "casque de gladiateur",
+            "name": "Gladiator Helmet",
             "attack": "5",
             "hp": "10",
             "critHit": "6",
             "cost" : "7"
         },
         {
-            "name": "bottes de vitesse",
+            "name": "Speed Boots",
             "attack": "7",
             "hp": "6",
             "critHit": "8",
             "cost" : "5"
         },
         {
-            "name": "cape d'invisibilité",
+            "name": "Invisibility Cloak",
             "attack": "4",
             "hp": "7",
             "critHit": "15",
             "cost" : "8"
         },
         {
-            "name": "bâton de sorcier",
+            "name": "Wizard Staff",
             "attack": "9",
             "hp": "8",
             "critHit": "9",
             "cost" : "9"
         },
         {
-            "name": "ceinture de force",
+            "name": "Strength Belt",
             "attack": "10",
             "hp": "12",
             "critHit": "4",
             "cost" : "9"
         },
         {
-            "name": "gantelets de puissance",
+            "name": "Power Gauntlets",
             "attack": "11",
             "hp": "5",
             "critHit": "6",
             "cost" : "9"
         },
         {
-            "name": "anneau de vitalité",
+            "name": "Vitality Ring",
             "attack": "2",
             "hp": "25",
             "critHit": "1",
             "cost" : "12"
         },
         {
-            "name": "arcane d'énergie",
+            "name": "Energy Arcane",
             "attack": "13",
             "hp": "4",
             "critHit": "8",
             "cost" : "11"
         },
         {
-            "name": "lance de lumière",
+            "name": "Light Spear",
             "attack": "14",
             "hp": "7",
             "critHit": "7",
             "cost" : "9"
         },
         {
-            "name": "masque du faucon",
+            "name": "Falcon Mask",
             "attack": "5",
             "hp": "6",
             "critHit": "14",
             "cost" : "8"
         },
         {
-            "name": "plastron de titane",
+            "name": "Titanium Breastplate",
             "attack": "3",
             "hp": "18",
             "critHit": "3",
             "cost" : "9"
         },
         {
-            "name": "épée des cieux",
+            "name": "Heavenly Sword",
             "attack": "16",
             "hp": "2",
             "critHit": "9",
             "cost" : "10"
         },
         {
-            "name": "bouclier de cristal",
+            "name": "Crystal Shield",
             "attack": "4",
             "hp": "22",
             "critHit": "2",
             "cost" : "10"
         },
         {
-            "name": "épaulières de fer",
+            "name": "Iron Pauldrons",
             "attack": "6",
             "hp": "10",
             "critHit": "5",
             "cost" : "7"
         }
     ]
-
-
 
 }
