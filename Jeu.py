@@ -55,6 +55,9 @@ class Joueur(Personnage):
         
     def getMoney(self):
         return self._money
+    
+    def getName(self):
+        return self._name
 
 #--------------------------------------------------------- Class pour les objets --------------------------------------------------
 class Object :
@@ -73,9 +76,28 @@ class Object :
 
 # ------------------------------------------------------------------- Création du personnage principal ----------------------------------------
 
-principal_character = Joueur(input("Entrer votre nom : "))
 
-print(principal_character.getName())
+
+
+
+verification = input("Entrez votre nom : ")
+space_detector = verification.find(" ")
+
+print("\n-Votre nom doit comporter au moins 1 caractère .\n-Il ne peut pas posséder d'espace .\n")
+
+while len(verification) == 0 or space_detector > -1:
+    
+    verification = input("Entrez votre nom : ")
+    space_detector = verification.find(" ")
+    
+    if len(verification) != 0 and space_detector == -1:
+        break
+    
+    else :
+        print("\nVotre nom doit comporter au moins 1 caractère .\n Il ne peut pas posséder d'espace .\n")
+        
+
+principal_character = Joueur(verification)
 
 #-------------------------------------------------------------------- Création des listes d'instance -----------------------------------------
 
@@ -97,17 +119,13 @@ class Jeu :
     def openStore(self):
         #for i in range(20):
           #  print(jeu.getNameobjects(i),"/" ,jeu.getCost(i),"")
+        os.system("cls")
+        print("\nBienvenue dans le magasin",self._joueur.getName(),"!\n")
+        
         for obj in self._objects:
             print(obj.getName(), " -> ", obj.getCost(), "€")
         
-    def getCost(self, i):
-        return self._objects[i]._cost
-        
-    def getNameobjects(self, i):
-        return self._objects[i]._name
     
-    def getNameMonstre(self, i):
-        return self._monstre[i]._name
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 #_________________________________________________________________________________________________________________________________________________________________________________________#
@@ -115,5 +133,4 @@ class Jeu :
 jeu = Jeu(monstres, boss, principal_character, objects)
 
 jeu.openStore()
-
 
