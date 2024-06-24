@@ -134,3 +134,4 @@ jeu = Jeu(monstres, boss, principal_character, objects)
 
 jeu.openStore()
 
+print("C'est bon ")
