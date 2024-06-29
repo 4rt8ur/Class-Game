@@ -172,4 +172,6 @@ class Jeu :
 jeu = Jeu(monstres, boss, principal_character, gears)
 
 jeu.openStore()
-jeu.openStore()
+
+
+print("C'est bon ")

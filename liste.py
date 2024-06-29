@@ -12,3 +12,4 @@ def multiVMAXSHINNY(liste):
 nombre = multiVMAXSHINNY(nombre)
 print(nombre)
 
+print(" C'est encore bon mais mieux ")
