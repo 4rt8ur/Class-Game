@@ -85,6 +85,7 @@ class Object :
         self._attack:   int = int(data.get('attack','0'))
         self._critHit:  int = int(data.get('critHit','0'))
         self._cost:     int = int(data.get('cost','10'))
+        self._possède       = False
         self._id:       int = Object.id
         Object.id += 1
         
@@ -153,52 +154,51 @@ class Jeu :
     
 
     def openStore(self):
-        #for i in range(20):
-          #  print(jeu.getNameobjects(i),"/" ,jeu.getCost(i),"")
-        os.system("cls")
-        print("\nBienvenue dans le magasin",self.joueur.getName(),"!\n")
-        print("Vous avez :", self.joueur.getMoney(), "€")
+        while True :
         
-        compteur_action = 0
-        for obj in self.gear:
-            compteur_action += 1
-            print(obj.getId(), obj.getName(), " -> ", obj.getCost(), "€")
+            #for i in range(20):
+            #  print(jeu.getNameobjects(i),"/" ,jeu.getCost(i),"")
+            os.system("cls")
+            print("\nBienvenue dans le magasin",self.joueur.getName(),"!\n")
+            print("Vous avez :", self.joueur.getMoney(), "€")
+            
+            compteur_action = 0
+            for obj in self.gear:
+                compteur_action += 1
+                print(obj.getId(), obj.getName(), " -> ", obj.getCost(), "€")
+                
+                
+            print(compteur_action, "Quitter le magasin")
+            
+            action = int(input("Que voulez vous faire ? Entrez le numéro correspondant à l'action voulue :\n"))
             
             
-        print(compteur_action, "Quitter le magasin")
-        
-        action = int(input("Que voulez vous faire ? Entrez le numéro correspondant à l'action voulue :\n"))
-        
-        if action == compteur_action:
-            print("T'as quitté")
-        
-        elif self.joueur.getMoney() >= self.gear[action].getCost():
             
-            #for obj in self.joueur.get       A finir 
+            if action == compteur_action:
+                print("T'as quitté")
+                break
             
-            self.joueur.addGear(self.gear[action])
+            elif self.joueur.getMoney() >= self.gear[action].getCost():
+                
+                #for obj in self.joueur.get       A finir 
+                
+                self.joueur.addGear(self.gear[action])
+                
+                print("Vous avez :", self.joueur.setMoney(self.gear[action].getCost()), "€")
+                
             
-            print("Vous avez :", self.joueur.setMoney(self.gear[action].getCost()), "€")
-            time.sleep(3)
+            else :
+                print("Vous n'avez pas assez d'argent")
+                time.sleep(2)
+                
+            
             
             for obj in self.joueur.getGears():
-            
+                
                 print("Vous possédez le", obj.getName())
             
-            time.sleep(2)
-            self.openStore()
+            time.sleep(3)
             
-        
-        else :
-            print("Vous n'avez pas assez d'argent")
-            time.sleep(2)
-            self.openStore()
-        
-        
-        for obj in self.joueur.getGears():
-            
-            print("Vous possédez le", obj.getName())
-        time.sleep(2)
             
         
     def combat(self):
@@ -215,6 +215,5 @@ class Jeu :
 jeu = Jeu(monstres, boss, principal_character, gears)
 
 jeu.openStore()
-
 
 print("C'est bon ")
