@@ -2,6 +2,7 @@
 import json
 import os
 import time
+import re
 
 # Clear le terminal 
 os.system("cls")
@@ -85,7 +86,7 @@ class Object :
         self._attack:   int = int(data.get('attack','0'))
         self._critHit:  int = int(data.get('critHit','0'))
         self._cost:     int = int(data.get('cost','10'))
-        self._possède       = False
+        self._possede       = False
         self._id:       int = Object.id
         Object.id += 1
         
@@ -105,10 +106,18 @@ class Object :
     
     def getHp(self):
         return self._hp
+    
+    def getObtention(self):
+        return self._possede
+    
+    def setObtention(self, objet_traite, liste):
+        
+        for obj in liste:
+            if objet_traite == obj :
+                objet_traite._possede = True
+        
+    
 # ------------------------------------------------------------------- Création du personnage principal ----------------------------------------
-
-
-
 
 
 verification = input("Entrez votre nom : ")
@@ -154,34 +163,57 @@ class Jeu :
     
 
     def openStore(self):
-        while True :
+        ouverture_magasin = True
+        while ouverture_magasin :
         
             #for i in range(20):
             #  print(jeu.getNameobjects(i),"/" ,jeu.getCost(i),"")
             os.system("cls")
+            for obj in self.gear:
+                obj.setObtention(obj, self.joueur.getGears())
+            
             print("\nBienvenue dans le magasin",self.joueur.getName(),"!\n")
             print("Vous avez :", self.joueur.getMoney(), "€")
             
             compteur_action = 0
             for obj in self.gear:
                 compteur_action += 1
-                print(obj.getId(), obj.getName(), " -> ", obj.getCost(), "€")
+                
+                print(obj.getId(), obj.getName(), " -> ", obj.getCost(), "€", obj.getObtention())
                 
                 
             print(compteur_action, "Quitter le magasin")
             
-            action = int(input("Que voulez vous faire ? Entrez le numéro correspondant à l'action voulue :\n"))
+            action = input("Que voulez vous faire ? Entrez le numéro correspondant à l'action voulue :\n")
             
             
+            verification = re.match(r'\d',action)
+            
+            if verification == None :
+                print(f"Vous devez entrez un nombre entre 0 et {compteur_action}")
+                time.sleep(2)
+                continue
+            
+            action = int(action)
+
+            if action > compteur_action:
+                print(f"Vous devez entrez un nombre entre 0 et {compteur_action}")
+                time.sleep(2)
+                continue
+
             
             if action == compteur_action:
                 print("T'as quitté")
+                ouverture_magasin = False
                 break
             
+            if self.gear[action].getObtention():
+                print("Vous avez déjà cet objet")
+                time.sleep(1)
+                continue
+
             elif self.joueur.getMoney() >= self.gear[action].getCost():
-                
-                #for obj in self.joueur.get       A finir 
-                
+            
                 self.joueur.addGear(self.gear[action])
                 
                 print("Vous avez :", self.joueur.setMoney(self.gear[action].getCost()), "€")
@@ -199,7 +231,7 @@ class Jeu :
             
             time.sleep(3)
             
-            
+           
         
     def combat(self):
         pass
