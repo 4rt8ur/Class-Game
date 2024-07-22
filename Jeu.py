@@ -131,7 +131,7 @@ while len(verification) == 0 or space_detector > -1:
     space_detector = verification.find(" ")
     
 
-        
+     
 
 principal_character = Joueur(verification)
 
@@ -155,7 +155,12 @@ class Jeu :
         
             
     def openMenu(self):
-        pass
+        print("\nBonjour", self.joueur.getName(),"!\n")
+        
+        quit
+        
+            
+
     
     def openCombat(self):
         pass
@@ -178,8 +183,11 @@ class Jeu :
             compteur_action = 0
             for obj in self.gear:
                 compteur_action += 1
-                
-                print(obj.getId(), obj.getName(), " -> ", obj.getCost(), "€", obj.getObtention())
+                if obj.getObtention() == True:
+                    print(obj.getId(), obj.getName(), " -> ", obj.getCost(), "€ /  Obtenu")
+                else:
+                    print(obj.getId(), obj.getName(), " -> ", obj.getCost(), "€")
+
                 
                 
             print(compteur_action, "Quitter le magasin")
@@ -203,11 +211,11 @@ class Jeu :
 
             
             if action == compteur_action:
-                print("T'as quitté")
+                print("T'as quitté\n")
                 ouverture_magasin = False
-                break
+                
             
-            if self.gear[action].getObtention():
+            elif self.gear[action].getObtention():
                 print("Vous avez déjà cet objet")
                 time.sleep(1)
                 continue
@@ -229,7 +237,7 @@ class Jeu :
                 
                 print("Vous possédez le", obj.getName())
             
-            time.sleep(3)
+            time.sleep(1.5)
             
            
         
