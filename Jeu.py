@@ -156,8 +156,22 @@ class Jeu :
             
     def openMenu(self):
         print("\nBonjour", self.joueur.getName(),"!\n")
+        print("\n0 - Aller au magasin\n1 - Aller combattre")
+        endroit = input("Où voulez vous aller ?\n")
         
-        quit
+        verif = re.match(r'\d',endroit)
+        if verif == None:
+            print("Invalide")
+ 
+        endroit = int(endroit)     
+        
+        if endroit == 0 :
+            self.openStore()
+            
+        if endroit == 1 :
+            self.openCombat()
+        
+        
         
             
 
@@ -213,6 +227,7 @@ class Jeu :
             if action == compteur_action:
                 print("T'as quitté\n")
                 ouverture_magasin = False
+                self.openMenu()
                 
             
             elif self.gear[action].getObtention():
@@ -254,6 +269,5 @@ class Jeu :
 
 jeu = Jeu(monstres, boss, principal_character, gears)
 
-jeu.openStore()
-
+jeu.openMenu()
 print("C'est bon ")
