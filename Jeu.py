@@ -57,8 +57,7 @@ class Joueur(Personnage):
     def getMoney(self):
         return self._money
     
-    def getName(self):
-        return self._name
+    
     
     def addGear(self, gear):
         self._gears.append(gear)
@@ -155,21 +154,37 @@ class Jeu :
         
             
     def openMenu(self):
-        print("\nBonjour", self.joueur.getName(),"!\n")
-        print("\n0 - Aller au magasin\n1 - Aller combattre")
-        endroit = input("Où voulez vous aller ?\n")
-        
-        verif = re.match(r'\d',endroit)
-        if verif == None:
-            print("Invalide")
- 
-        endroit = int(endroit)     
-        
-        if endroit == 0 :
-            self.openStore()
+        menu_ouvert = True
+        while menu_ouvert : 
+            print("\nBonjour", self.joueur.getName(),"!\n")
+            print("\n0 - Aller au magasin\n1 - Aller combattre")
+            endroit = input("Où voulez vous aller ?\n")
             
-        if endroit == 1 :
-            self.openCombat()
+            verif = re.match(r'\d',endroit)
+            if verif != None:
+
+                endroit = int(endroit)     
+                
+                if endroit == 0 :
+                    menu_ouvert = None
+                    self.openStore()
+                    
+                elif endroit == 1 :
+                    menu_ouvert = None
+                    self.openCombat()
+            
+                else :
+                    print("Choisir entre 0 et 1")
+                    self.openMenu()
+
+            else :
+                print("Invalide")
+
+
+        
+        
+
+        
         
         
         
@@ -177,9 +192,23 @@ class Jeu :
 
     
     def openCombat(self):
+        print("Bienvenue dans le ring !!")
+        print("Que voulez vous combattre parmi :\n")
+
+        for monstre in self.monstres :
+            print("- ", monstre.getName(),"/", monstre.getAttack(),"Attaque /", monstre.getHp(),"Hp")
+
+        cible = input()
+
+        
+
+
+
+    
+    def combat(self, target):
         pass
-    
-    
+
+
 
     def openStore(self):
         ouverture_magasin = True
@@ -256,8 +285,7 @@ class Jeu :
             
            
         
-    def combat(self):
-        pass
+    
         
             
         
@@ -270,4 +298,5 @@ class Jeu :
 jeu = Jeu(monstres, boss, principal_character, gears)
 
 jeu.openMenu()
+
 print("C'est bon ")
