@@ -222,6 +222,9 @@ class Jeu :
             
             print("\nBienvenue dans le magasin",self.joueur.getName(),"!\n")
             print("Vous avez :", self.joueur.getMoney(), "€")
+            for obj in self.joueur.getGears():
+                
+                print("Vous possédez le", obj.getName())
             
             compteur_action = 0
             for obj in self.gear:
@@ -277,11 +280,9 @@ class Jeu :
                 
             
             
-            for obj in self.joueur.getGears():
-                
-                print("Vous possédez le", obj.getName())
             
-            time.sleep(1.5)
+            
+           
             
            
         
