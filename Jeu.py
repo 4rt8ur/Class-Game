@@ -40,10 +40,16 @@ class Personnage:
 #------------------- Sous Class ------------------------    
 class Monstres(Personnage):
     
+    id = 0
     def __init__(self, data):
         super().__init__(data.get('name','Monstre'))
         self._hp = int(data.get('hp','5'))
         self._attack = int(data.get('attack','5'))
+        self._id:       int = Monstres.id
+        Monstres.id += 1
+        
+    def getId(self):
+        return self._id
     
 class Joueur(Personnage):
     
@@ -192,21 +198,70 @@ class Jeu :
 
     
     def openCombat(self):
-        print("Bienvenue dans le ring !!")
-        print("Que voulez vous combattre parmi :\n")
-
-        for monstre in self.monstres :
-            print("- ", monstre.getName(),"/", monstre.getAttack(),"Attaque /", monstre.getHp(),"Hp")
-
-        cible = input()
+        ring_open = True
+        while ring_open:
+            liste_id = []
+            print("Bienvenue dans le ring !!")
+            print("Que voulez vous combattre :\n0 - Monstres \n1 - Boss")
+            choix_type = input()
+            if choix_type == "0":
+                
+                for monstre in self.monstres :
+                    print(monstre.getId(), "- ", monstre.getName(),"/", monstre.getAttack(),"Attaque /", monstre.getHp(),"Hp")
+                    liste_id.append(monstre.getId())
+                
+                
+                i = input("Entrez le numero du monstre voulu :")
+                
+                verif_syntaxe = re.match(r'\d', i)
+                if verif_syntaxe != None:
+                    
+                    i = int(i)
+                    verif_nombre = None
+                    
+                    for ids in liste_id:
+                        if i == ids:
+                            verif_nombre = True
+                    
+                    if verif_nombre == True :
+                        target = self.monstres[i]        
+                        ring_open = None  
+                        self.combat(target)
+                    
+                    else:
+                        ("Invalide")
+                    
+                              
+                
+                
+            
+            elif choix_type == "1":
+                
+                for boss in self.boss :
+                    print(boss.getId(), "- ", boss.getName(),"/", boss.getAttack(),"Attaque /", boss.getHp(),"Hp")
+                    
+                i = input("Entrez le numero du boss voulu :")
+                
+                target = self.boss[i]
+                
+                
+            else :
+                print("Invalide")
+                
+            
+            
+            
+                    
+        
 
         
 
 
 
     
-    def combat(self, target):
-        pass
+    def combat(self, monstre):
+        print("le monstre :", monstre.getName())
+        
 
 
 
