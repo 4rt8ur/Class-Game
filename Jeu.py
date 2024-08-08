@@ -229,20 +229,37 @@ class Jeu :
                         self.combat(target)
                     
                     else:
-                        ("Invalide")
+                        print("Invalide")
+                else:
+                    print("Invalide")
                     
                               
-                
-                
             
             elif choix_type == "1":
                 
                 for boss in self.boss :
                     print(boss.getId(), "- ", boss.getName(),"/", boss.getAttack(),"Attaque /", boss.getHp(),"Hp")
+                    liste_id.append(boss.getId())
                     
                 i = input("Entrez le numero du boss voulu :")
                 
-                target = self.boss[i]
+                verif_syntaxe = re.match(r'\d', i)
+                if verif_syntaxe != None:
+                    
+                    i = int(i)
+                    verif_nombre = None
+                    
+                    for ids in liste_id:
+                        if i == ids:
+                            verif_nombre = True
+                    
+                    if verif_nombre == True :
+                        target = self.boss[i - 5] # i - 5 car dans la création, les monstres sont mis avant et donc ont les premiers id       
+                        ring_open = None  
+                        self.combat(target)
+                    
+                    else:
+                        print("Invalide")
                 
                 
             else :
