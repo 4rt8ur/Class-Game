@@ -430,4 +430,4 @@ jeu = Jeu(monstres, boss, principal_character, gears)
 
 jeu.openMenu()
 
-print("C'est bon ")
+print("C'est bonne alors")
