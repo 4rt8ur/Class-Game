@@ -45,6 +45,7 @@ class Monstres(Personnage):
         super().__init__(data.get('name','Monstre'))
         self._hp = int(data.get('hp','5'))
         self._attack = int(data.get('attack','5'))
+        self._money = int(data.get('money','5'))
         self._etat = False
         self._id:       int = Monstres.id
         Monstres.id += 1
@@ -57,6 +58,9 @@ class Monstres(Personnage):
     
     def getEtat(self):
         return self._etat
+     
+    def getMoney(self):
+        return self._money
     
 class Joueur(Personnage):
     
@@ -64,7 +68,7 @@ class Joueur(Personnage):
         super().__init__(nom)
         self._hp = 5
         self._attack = 3
-        self._money:  int = int(100)
+        self._money:  int = int(0)
         self._gears = []
         
     def getMoney(self):
@@ -78,9 +82,13 @@ class Joueur(Personnage):
     def getGears(self):
         return self._gears
     
-    def setMoney(self, gear_paid):
+    def achat(self, gear_paid):
         self._money = self._money - gear_paid
         return self._money
+
+    def moneyRecomp(self, argent_gagné):
+        self._money += argent_gagné
+        
     
     
     
@@ -134,11 +142,12 @@ class Object :
     
 # ------------------------------------------------------------------- Création du personnage principal ----------------------------------------
 
+print("\n-Votre nom doit comporter au moins 1 caractère .\n-Il ne peut pas posséder d'espace .\n")
 
 verification = input("Entrez votre nom : ")
 space_detector = verification.find(" ")
 
-print("\n-Votre nom doit comporter au moins 1 caractère .\n-Il ne peut pas posséder d'espace .\n")
+
 
 while len(verification) == 0 or space_detector > -1:
     
@@ -322,6 +331,8 @@ class Jeu :
             
             elif hp_monstre <= 0:
                 print("t'as win")
+                self.joueur.moneyRecomp(monstre.getMoney())
+                print(self.joueur.getMoney())
                 time.sleep(2)
                 os.system("cls")
                 monstre.setEtat()
@@ -357,9 +368,9 @@ class Jeu :
             for obj in self.gear:
                 compteur_action += 1
                 if obj.getObtention() == True:
-                    print(obj.getId(), obj.getName(), " -> ", obj.getCost(), "€ /  Obtenu")
+                    print(obj.getId(), obj.getName(),"/", obj.getAttack(), "Attack /", obj.getHp(), "hp //", " -> ", obj.getCost(), "€ /  Obtenu\n")
                 else:
-                    print(obj.getId(), obj.getName(), " -> ", obj.getCost(), "€")
+                    print(obj.getId(), obj.getName(),"/", obj.getAttack(), "Attack /", obj.getHp(), "hp //", " -> ", obj.getCost(), "€\n")
 
                 
                 
@@ -401,7 +412,7 @@ class Jeu :
             
                 self.joueur.addGear(self.gear[action])
                 
-                print("Vous avez :", self.joueur.setMoney(self.gear[action].getCost()), "€")
+                print("Vous avez :", self.joueur.achat(self.gear[action].getCost()), "€")
                 
             
             else :
@@ -413,15 +424,6 @@ class Jeu :
             
             
            
-            
-           
-        
-    
-        
-            
-        
-        
-    
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 #_________________________________________________________________________________________________________________________________________________________________________________________#
@@ -430,4 +432,4 @@ jeu = Jeu(monstres, boss, principal_character, gears)
 
 jeu.openMenu()
 
-print("C'est bonne alors")
+print("C'est fini")
