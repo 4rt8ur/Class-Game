@@ -45,11 +45,18 @@ class Monstres(Personnage):
         super().__init__(data.get('name','Monstre'))
         self._hp = int(data.get('hp','5'))
         self._attack = int(data.get('attack','5'))
+        self._etat = False
         self._id:       int = Monstres.id
         Monstres.id += 1
         
     def getId(self):
         return self._id
+    
+    def setEtat(self):
+        self._etat = True
+    
+    def getEtat(self):
+        return self._etat
     
 class Joueur(Personnage):
     
@@ -74,6 +81,9 @@ class Joueur(Personnage):
     def setMoney(self, gear_paid):
         self._money = self._money - gear_paid
         return self._money
+    
+    
+    
     
         
         
@@ -160,52 +170,56 @@ class Jeu :
         
             
     def openMenu(self):
-        menu_ouvert = True
-        while menu_ouvert : 
-            print("\nBonjour", self.joueur.getName(),"!\n")
-            print("\n0 - Aller au magasin\n1 - Aller combattre")
-            endroit = input("Où voulez vous aller ?\n")
-            
-            verif = re.match(r'\d',endroit)
-            if verif != None:
-
-                endroit = int(endroit)     
+        boss_vaincu = 0
+        nombre_boss = 0
+        for boss in self.boss:
+            nombre_boss += 1
+            if boss.getEtat() == True:
+                boss_vaincu += 1
                 
-                if endroit == 0 :
-                    menu_ouvert = None
-                    self.openStore()
+        if boss_vaincu == nombre_boss:
+            print("T'as battu tous les boss, t'as termine mon jeu")    
+               
+        else:    
+            menu_ouvert = True
+            while menu_ouvert : 
+                print("\nBonjour", self.joueur.getName(),"!\nLe but du jeu est de vaincre tous les boss. Tu peux voir ta progression dans le menu pour battre les boss.")
+                print("\n0 - Aller au magasin\n1 - Aller combattre")
+                endroit = input("Où voulez vous aller ?\n")
+                
+                verif = re.match(r'\d',endroit)
+                if verif != None:
+
+                    endroit = int(endroit)     
                     
-                elif endroit == 1 :
-                    menu_ouvert = None
-                    self.openCombat()
-            
+                    if endroit == 0 :
+                        menu_ouvert = None
+                        self.openStore()
+                        
+                    elif endroit == 1 :
+                        menu_ouvert = None
+                        self.openCombat()
+                
+                    else :
+                        print("Choisir entre 0 et 1")
+                        self.openMenu()
+
                 else :
-                    print("Choisir entre 0 et 1")
-                    self.openMenu()
-
-            else :
-                print("Invalide")
-
-
-        
-        
-
-        
-        
-        
-        
+                    print("Invalide")
+            
             
 
     
     def openCombat(self):
         ring_open = True
         while ring_open:
+            os.system("cls")
             liste_id = []
             print("Bienvenue dans le ring !!")
             print("Que voulez vous combattre :\n0 - Monstres \n1 - Boss")
             choix_type = input()
             if choix_type == "0":
-                
+                os.system("cls")
                 for monstre in self.monstres :
                     print(monstre.getId(), "- ", monstre.getName(),"/", monstre.getAttack(),"Attaque /", monstre.getHp(),"Hp")
                     liste_id.append(monstre.getId())
@@ -236,9 +250,12 @@ class Jeu :
                               
             
             elif choix_type == "1":
-                
+                os.system("cls")
                 for boss in self.boss :
-                    print(boss.getId(), "- ", boss.getName(),"/", boss.getAttack(),"Attaque /", boss.getHp(),"Hp")
+                    if boss.getEtat() == True:
+                        print(boss.getId(), "- ", boss.getName(),"/", boss.getAttack(),"Attaque /", boss.getHp(),"Hp / battue")
+                    else :
+                        print(boss.getId(), "- ", boss.getName(),"/", boss.getAttack(),"Attaque /", boss.getHp(),"Hp")
                     liste_id.append(boss.getId())
                     
                 i = input("Entrez le numero du boss voulu :")
@@ -259,9 +276,7 @@ class Jeu :
                         self.combat(target)
                     
                     else:
-                        print("Invalide")
-                
-                
+                        print("Invalide")     
             else :
                 print("Invalide")
                 
@@ -277,7 +292,47 @@ class Jeu :
 
     
     def combat(self, monstre):
-        print("le monstre :", monstre.getName())
+        os.system("cls")
+        print("Tu combats", monstre.getName())
+        attaque_joueur = self.joueur.getAttack()
+        hp_joueur = self.joueur.getHp()
+        hp_monstre = monstre.getHp()
+        for obj in self.joueur.getGears():
+            attaque_joueur += obj.getAttack()
+        
+        print(attaque_joueur, hp_joueur, hp_monstre)
+            
+        combat = True    
+        while combat == True:
+            os.system("cls")
+            print("Tu attaque :")
+            hp_monstre -= attaque_joueur
+            print(f"le monstre perd {attaque_joueur} Hp, il a donc {hp_monstre} Hp")
+            if hp_monstre > 0:
+                print("Le monstre attaque :")
+                hp_joueur -= monstre.getAttack()
+                print(f"Tu perds {monstre.getAttack()} Hp, tu as donc {hp_joueur} Hp")
+            
+            if hp_joueur <= 0:
+                print("t'as perdu")
+                time.sleep(2)
+                os.system("cls")
+                combat = False
+                self.openMenu()
+            
+            elif hp_monstre <= 0:
+                print("t'as win")
+                time.sleep(2)
+                os.system("cls")
+                monstre.setEtat()
+                combat = False
+                self.openMenu()
+            
+            
+        
+                
+                
+            
         
 
 
@@ -330,10 +385,13 @@ class Jeu :
             
             if action == compteur_action:
                 print("T'as quitté\n")
+                time.sleep(1)
+                os.system("cls")
                 ouverture_magasin = False
                 self.openMenu()
                 
-            
+    
+
             elif self.gear[action].getObtention():
                 print("Vous avez déjà cet objet")
                 time.sleep(1)
