@@ -68,7 +68,7 @@ class Joueur(Personnage):
         super().__init__(nom)
         self._hp = 5
         self._attack = 3
-        self._money:  int = int(100)
+        self._money = int(100)
         self._gears = []
         
     def getMoney(self):
@@ -89,7 +89,13 @@ class Joueur(Personnage):
     def moneyRecomp(self, argent_gagné):
         self._money += argent_gagné
         
-    
+    def setStats(self, obj_attack, obj_hp):
+        self._attack += obj_attack
+        self._hp += obj_hp
+        
+        
+        
+        
     
     
     
@@ -193,12 +199,7 @@ class Jeu :
             menu_ouvert = True
             while menu_ouvert : 
                 print("\nBonjour", self.joueur.getName(),"!\nLe but du jeu est de vaincre tous les boss. Tu peux voir ta progression dans le menu pour battre les boss.")
-                attaque_joueur = self.joueur.getAttack()
-                hp_joueur = self.joueur.getHp()
-                for obj in self.joueur.getGears():
-                    attaque_joueur += obj.getAttack()
-                    hp_joueur += obj.getHp()
-                print(f"vous avez {attaque_joueur} attaque et {hp_joueur} Hp")
+                print(f"vous avez {self.joueur.getAttack()} attaque et {self.joueur.getHp()} Hp")
                 print("\n0 - Aller au magasin\n1 - Aller combattre")
                 endroit = input("Où voulez vous aller ?\n")
                 
@@ -229,12 +230,8 @@ class Jeu :
         ring_open = True
         while ring_open:
             os.system("cls")
-            attaque_joueur = self.joueur.getAttack()
-            hp_joueur = self.joueur.getHp()
-            for obj in self.joueur.getGears():
-                attaque_joueur += obj.getAttack()
-                hp_joueur += obj.getHp()
-            print(f"vous avez {attaque_joueur} attaque et {hp_joueur} Hp")
+            
+            print(f"vous avez {self.joueur.getAttack()} attaque et {self.joueur.getHp()} Hp")
             liste_id = []
             print("Bienvenue dans le ring !!")
             print("Que voulez vous combattre :\n0 - Monstres \n1 - Boss")
@@ -314,20 +311,18 @@ class Jeu :
     
     def combat(self, monstre):
         os.system("cls")
-        print(f"Vous avez {self.joueur.getAttack()} attack et {self.joueur.getHp()} Hp\n")
+        
         print("Tu combats", monstre.getName())
         hp_monstre = monstre.getHp()
         attaque_joueur = self.joueur.getAttack()
         hp_joueur = self.joueur.getHp()
-        for obj in self.joueur.getGears():
-            attaque_joueur += obj.getAttack()
-            hp_joueur += obj.getHp()
+        
         print(f"vous avez {attaque_joueur} attaque et {hp_joueur} Hp")
             
         combat = True    
         while combat == True:
             os.system("cls")
-            print("Tu attaque :")
+            print("Tu attaques :")
             hp_monstre -= attaque_joueur
             print(f"le monstre perd {attaque_joueur} Hp, il a donc {hp_monstre} Hp")
             if hp_monstre > 0:
@@ -345,7 +340,7 @@ class Jeu :
             elif hp_monstre <= 0:
                 print("t'as win")
                 self.joueur.moneyRecomp(monstre.getMoney())
-                print(self.joueur.getMoney())
+                print(self.joueur.getMoney(), "€ tu as")
                 time.sleep(2)
                 os.system("cls")
                 monstre.setEtat()
@@ -365,20 +360,18 @@ class Jeu :
         ouverture_magasin = True
         while ouverture_magasin :
         
-            #for i in range(20):
-            #  print(jeu.getNameobjects(i),"/" ,jeu.getCost(i),"")
             os.system("cls")
             for obj in self.gear:
                 obj.setObtention(obj, self.joueur.getGears())
             
             print("\nBienvenue dans le magasin",self.joueur.getName(),"!\n")
             print("Vous avez :", self.joueur.getMoney(), "€")
-            attaque_joueur = self.joueur.getAttack()
+            
             hp_joueur = self.joueur.getHp()
             for obj in self.joueur.getGears():
-                attaque_joueur += obj.getAttack()
+                
                 hp_joueur += obj.getHp()
-            print(f"vous avez {attaque_joueur} attaque et {hp_joueur} Hp")
+            print(f"vous avez {self.joueur.getAttack()} attaque et {self.joueur.getHp()} Hp")
             for obj in self.joueur.getGears():
                 
                 print("Vous possédez le", obj.getName())
@@ -420,6 +413,7 @@ class Jeu :
                 ouverture_magasin = False
                 self.openMenu()
                 
+                
     
 
             elif self.gear[action].getObtention():
@@ -430,8 +424,10 @@ class Jeu :
             elif self.joueur.getMoney() >= self.gear[action].getCost():
             
                 self.joueur.addGear(self.gear[action])
-                
+                print(self.joueur.getAttack())
                 print("Vous avez :", self.joueur.achat(self.gear[action].getCost()), "€")
+                self.joueur.setStats(self.gear[action].getAttack(), self.gear[action].getHp())
+                print(self.joueur.getAttack())
                 
             
             else :
