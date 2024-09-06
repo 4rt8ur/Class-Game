@@ -185,41 +185,49 @@ class Jeu :
         
             
     def openMenu(self):
+        
+        
         boss_vaincu = 0
         nombre_boss = 0
+        
         for boss in self.boss:
-            nombre_boss += 1
-            if boss.getEtat() == True:
-                boss_vaincu += 1
+                nombre_boss += 1
+        
+        while boss_vaincu != nombre_boss : 
+            
+            boss_vaincu = 0
+            
+            for boss in self.boss:
                 
-        if boss_vaincu == nombre_boss:
-            print("T'as battu tous les boss, t'as termine mon jeu")    
-               
-        else:    
-            menu_ouvert = True
-            while menu_ouvert : 
+                if boss.getEtat() == True:
+                    boss_vaincu += 1
+                    
+            if boss_vaincu == nombre_boss:
+                print("T'as battu tous les boss, t'as termine mon jeu")    
+                
+                
+            else:   
                 print("\nBonjour", self.joueur.getName(),"!\nLe but du jeu est de vaincre tous les boss. Tu peux voir ta progression dans le menu pour battre les boss.")
                 print(f"vous avez {self.joueur.getAttack()} attaque et {self.joueur.getHp()} Hp")
                 print("\n0 - Aller au magasin\n1 - Aller combattre")
-                endroit = input("Où voulez vous aller ?\n")
-                
-                verif = re.match(r'\d',endroit)
+                endroit = input("Où voulez vous aller ?\n")    
+                    
+                verif = re.match(r'^\d+$',endroit)
                 if verif != None:
 
-                    endroit = int(endroit)     
-                    
+                    endroit = int(endroit)
+                
                     if endroit == 0 :
-                        menu_ouvert = None
+                        
                         self.openStore()
                         
                     elif endroit == 1 :
-                        menu_ouvert = None
+                        
                         self.openCombat()
                 
                     else :
                         print("Choisir entre 0 et 1")
-                        self.openMenu()
-
+                        
                 else :
                     print("Invalide")
             
@@ -234,7 +242,7 @@ class Jeu :
             print(f"vous avez {self.joueur.getAttack()} attaque et {self.joueur.getHp()} Hp")
             liste_id = []
             print("Bienvenue dans le ring !!")
-            print("Que voulez vous combattre :\n0 - Monstres \n1 - Boss")
+            print("Que voulez vous combattre :\n0 - Monstres \n1 - Boss \n2 - Quitte")
             choix_type = input()
             if choix_type == "0":
                 os.system("cls")
@@ -245,7 +253,7 @@ class Jeu :
                 
                 i = input("Entrez le numero du monstre voulu :")
                 
-                verif_syntaxe = re.match(r'\d', i)
+                verif_syntaxe = re.match(r'^\d+$', i)
                 if verif_syntaxe != None:
                     
                     i = int(i)
@@ -278,7 +286,7 @@ class Jeu :
                     
                 i = input("Entrez le numero du boss voulu :")
                 
-                verif_syntaxe = re.match(r'\d', i)
+                verif_syntaxe = re.match(r'^\d+$', i)
                 if verif_syntaxe != None:
                     
                     i = int(i)
@@ -290,11 +298,15 @@ class Jeu :
                     
                     if verif_nombre == True :
                         target = self.boss[i - 5] # i - 5 car dans la création, les monstres sont mis avant et donc ont les premiers id       
-                        ring_open = None  
+                        
                         self.combat(target)
                     
                     else:
                         print("Invalide")     
+            
+            elif choix_type == "2":
+                ring_open = None
+            
             else :
                 print("Invalide")
                 
@@ -335,7 +347,7 @@ class Jeu :
                 time.sleep(2)
                 os.system("cls")
                 combat = False
-                self.openMenu()
+                
             
             elif hp_monstre <= 0:
                 print("t'as win")
@@ -345,13 +357,12 @@ class Jeu :
                 os.system("cls")
                 monstre.setEtat()
                 combat = False
-                self.openMenu()
+                
             
             
         
                 
-                
-            
+      
         
 
 
@@ -391,7 +402,7 @@ class Jeu :
             action = input("Que voulez vous faire ? Entrez le numéro correspondant à l'action voulue :\n")
             
             
-            verification = re.match(r'\d',action)
+            verification = re.match(r'^\d+$',action)
             
             if verification == None :
                 print(f"Vous devez entrez un nombre entre 0 et {compteur_action}")
@@ -411,7 +422,7 @@ class Jeu :
                 time.sleep(1)
                 os.system("cls")
                 ouverture_magasin = False
-                self.openMenu()
+                
                 
                 
     
